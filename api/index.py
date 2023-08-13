@@ -1,12 +1,9 @@
-from flask import Flask
-import face_recognition
-
-app = Flask(__name__)
-
+from sanic import Sanic
+from sanic.response import json
+app = Sanic()
+ 
+ 
 @app.route('/')
-def home():
-    return 'Hello, World!'
-
-@app.route('/about')
-def about():
-    return 'About'
+@app.route('/<path:path>')
+async def index(request, path=""):
+    return json({'hello': path})
